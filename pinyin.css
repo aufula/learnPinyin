@@ -1,16 +1,42 @@
 * {
 	padding: 0;
 	margin: 0;
+	font-family: "ABeeZee";
+	font-family: "Be Vietnam Pro";
+	font-family: "Comfortaa";
+	font-family: "Mulish";
+	/* font-family: "Charis SIL","Doulos SIL","Linux Libertine","Segoe UI","Lucida Sans Unicode","Code2000","Gentium","Gentium Alternative","TITUS Cyberbit Basic","Arial Unicode MS","IPAPANNEW","Chrysanthi Unicode","GentiumAlt","Bitstream Vera","Bitstream Cyberbit","Hiragino Kaku Gothic Pro","Lucida Grande",sans-serif; */
+	/* font-family: "chalkboard se"; */
+	/* font-family: "华文楷体"; */
+}
+
+body{
+	background-color: #caeace;
+}
+
+.wrap{
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+.box{
+	flex:1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 128px;
+	/* font-weight: 100; */
 }
 
 button{
-	font-family: Arial;
 	font-size: 30px;
 	border: 1px outset #DDD;
 	margin: 3px;
 	padding: 2px 3px;
 	min-width: 50px;
 }
+
 
 #pyText,select {
 	width: 96%;

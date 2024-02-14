@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html manifest="pinyin.manifest">
+
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>拼音组合</title>
+</head>
+<link rel="stylesheet" type="text/css" href="pinyin.css">
+<script src="pymp3.js"></script>
+
+<body>
+   
+
+    <div class="wrap">
+
+       <div class="box">
+            <span id="char">按空格开始</span>
+       </div>
+    </div>
+
+    <script type="text/javascript">
+   
+
+   var sm = ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']
+        var ym = ['a', 'o', 'e', 'i', 'u', 'ü', ]// 'ai', 'ei', 'ui', 'ao', 'ou', 'iu', 'ie', 'ue', 'er', 'an', 'en', 'in', 'un', 'ang', 'eng', 'ing', 'ong', 'ian', 'iao', 'uai', 'uan', 'uang', 'uo', 'ia', 'ua', 'iang', 'iong']
+        var sd = ['0','1','2','3','4'];
+
+        function shuffleArray(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        const char = document.querySelector('#char')
+
+    function randomPick() {
+        const s = shuffleArray([...sm])[Math.floor(sm.length/2)]
+        const y = shuffleArray([...ym])[Math.floor(ym.length/2)]
+        const d = shuffleArray([...sd])[Math.floor(sd.length/2)]
+        var rets = queryPinYin(s, y, d);
+
+        if(rets && rets.length === 0) {
+            randomPick()
+        }else{
+            console.log(rets)
+            char.innerHTML = `<span style="font-size:15vw">${rets[0]}</span>`
+        }
+    }
+
+    function queryPinYin(sm, ym, sd) {
+        var rets = [];
+        for (var py in pyInfos) {
+            var pyinfo = pyInfos[py];
+            if ((sm == "") || (sm == pyinfo.sm)) {
+                if ((ym == "") || (ym == pyinfo.ym)) {
+                    if ((sd == "") || (sd == pyinfo.sd)) {
+                        rets.push(py);
+                        if (rets.length >= 10) {
+                            return rets;
+                        }
+                    }
+                }
+            }
+        }
+        return rets;
+    }
+
+    document.body.addEventListener('keypress', (x)=>{
+        if(x.code="Space"){
+        randomPick()
+        }
+        })
+    </script>
+</body>
+
+</html>

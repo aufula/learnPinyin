@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html manifest="pinyin.manifest">
+
+<head>
+    <meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>拼音组合</title>
+</head>
+<link rel="stylesheet" type="text/css" href="pinyin.css">
+
+<body>
+
+    <div class="wrap">
+
+        <div>
+            <select id="sel" value="ym">
+                <option value="ym">韵母</option>
+                <option value="sm">声母</option>
+           </select>
+           <button id="rd">打乱</button>
+        </div>
+       
+
+       <div class="box">
+        <!-- <span>ā  á  ǎ  à  ō  ó  ǒ  ò  ē  é  ě  è  ī  í  ǐ  ì  ū  ú  ǔ  ǔ  ǖ  ǘ  ǚ  ǜ</span>
+        <span>b  p  m  f  d  t  n  l  g  k  h  j  q  x  zh  ch  sh  r  z  c  s  y  w</span>
+  -->
+            <span id="char">按空格开始</span>
+       </div>
+    </div>
+
+    <script>
+
+        const yunmu = ['ā', 'á', 'ǎ', 'à', 'ō', 'ó', 'ǒ', 'ò', 'ē', 'é', 'ě', 'è', 'ī' , 'í' , 'ǐ', 'ì', 'ū', 'ú', 'ǔ', 'ǔ', 'ǖ', 'ǘ', 'ǚ', 'ǜ']
+        const shengmu = ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']
+        
+        function shuffleArray(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        var shuffleYunmu = shuffleArray([...yunmu]);
+        var shuffleShengmu = shuffleArray([...shengmu]);
+
+        document.querySelector('#rd').addEventListener('click',(e)=>{
+             shuffleYunmu = shuffleArray([...yunmu]);
+             shuffleShengmu = shuffleArray([...shengmu]);
+             e.target.blur()
+        })
+
+        const sl = document.querySelector('#sel')
+        const char = document.querySelector('#char')
+
+
+        document.body.addEventListener('keypress', (x)=>{
+            console.log(shuffleShengmu, shuffleYunmu);
+            let ch = ''
+            if(x.code="Space"){
+                if (sl.value == 'ym') {
+                    ch = shuffleYunmu.pop()
+                }
+
+                if (sl.value == 'sm') {
+                    ch = shuffleShengmu.pop()
+                }
+            }
+
+            console.log(ch)
+
+            char.innerHTML=ch ? `<span style="font-size:30vw">${ch}</span>` : '🎉'
+        })
+    </script>
+
+    
+</body>
+
+</html>
