@@ -22,7 +22,7 @@
         </div>
 
 
-        <div class="box">
+        <div id="box" class="box">
             <!-- <span>ā  á  ǎ  à  ō  ó  ǒ  ò  ē  é  ě  è  ī  í  ǐ  ì  ū  ú  ǔ  ǔ  ǖ  ǘ  ǚ  ǜ</span>
         <span>b  p  m  f  d  t  n  l  g  k  h  j  q  x  zh  ch  sh  r  z  c  s  y  w</span>
   -->
@@ -73,8 +73,7 @@
 
         })
 
-        document.body.addEventListener('touchstart', (e) => {
-            e.stopPropagation()
+        document.querySelector('#box').addEventListener('touchstart', (e) => {
             e.preventDefault()
             randomPick()
         }, {passive: false})

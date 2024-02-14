@@ -13,7 +13,7 @@
 <body>
     <div class="wrap">
 
-        <div class="box">
+        <div id="box" class="box">
             <span id="char">按空格开始</span>
         </div>
     </div>
@@ -69,9 +69,8 @@
             }
         })
 
-        document.body.addEventListener('touchstart', (e) => {
+        document.querySelector('#box').addEventListener('touchstart', (e) => {
             e.preventDefault()
-            e.stopPropagation()
             randomPick()
         }, {passive: false})
 
