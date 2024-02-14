@@ -69,9 +69,10 @@
             }
         })
 
-        document.body.addEventListener('touchstart', (x) => {
+        document.body.addEventListener('touchstart', (e) => {
+            e.preventDefault()
             randomPick()
-        })
+        }, {passive: false})
 
     </script>
 </body>
