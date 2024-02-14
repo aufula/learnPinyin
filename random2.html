@@ -71,6 +71,7 @@
 
         document.body.addEventListener('touchstart', (e) => {
             e.preventDefault()
+            e.stopPropagation()
             randomPick()
         }, {passive: false})
 
