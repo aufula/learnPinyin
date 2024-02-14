@@ -16,24 +16,24 @@
             <select id="sel" value="ym">
                 <option value="ym">韵母</option>
                 <option value="sm">声母</option>
-           </select>
-           <button id="rd">打乱</button>
+            </select>
+            <button id="rd">打乱</button>
         </div>
-       
 
-       <div class="box">
-        <!-- <span>ā  á  ǎ  à  ō  ó  ǒ  ò  ē  é  ě  è  ī  í  ǐ  ì  ū  ú  ǔ  ǔ  ǖ  ǘ  ǚ  ǜ</span>
+
+        <div class="box">
+            <!-- <span>ā  á  ǎ  à  ō  ó  ǒ  ò  ē  é  ě  è  ī  í  ǐ  ì  ū  ú  ǔ  ǔ  ǖ  ǘ  ǚ  ǜ</span>
         <span>b  p  m  f  d  t  n  l  g  k  h  j  q  x  zh  ch  sh  r  z  c  s  y  w</span>
   -->
             <span id="char">按空格开始</span>
-       </div>
+        </div>
     </div>
 
     <script>
 
-        const yunmu = ['ā', 'á', 'ǎ', 'à', 'ō', 'ó', 'ǒ', 'ò', 'ē', 'é', 'ě', 'è', 'ī' , 'í' , 'ǐ', 'ì', 'ū', 'ú', 'ǔ', 'ǔ', 'ǖ', 'ǘ', 'ǚ', 'ǜ']
+        const yunmu = ['ā', 'á', 'ǎ', 'à', 'ō', 'ó', 'ǒ', 'ò', 'ē', 'é', 'ě', 'è', 'ī', 'í', 'ǐ', 'ì', 'ū', 'ú', 'ǔ', 'ǔ', 'ǖ', 'ǘ', 'ǚ', 'ǜ']
         const shengmu = ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']
-        
+
         function shuffleArray(array) {
             return array.sort(() => Math.random() - 0.5);
         }
@@ -41,36 +41,43 @@
         var shuffleYunmu = shuffleArray([...yunmu]);
         var shuffleShengmu = shuffleArray([...shengmu]);
 
-        document.querySelector('#rd').addEventListener('click',(e)=>{
-             shuffleYunmu = shuffleArray([...yunmu]);
-             shuffleShengmu = shuffleArray([...shengmu]);
-             e.target.blur()
+        document.querySelector('#rd').addEventListener('click', (e) => {
+            shuffleYunmu = shuffleArray([...yunmu]);
+            shuffleShengmu = shuffleArray([...shengmu]);
+            e.target.blur()
         })
 
         const sl = document.querySelector('#sel')
         const char = document.querySelector('#char')
 
-
-        document.body.addEventListener('keypress', (x)=>{
-            console.log(shuffleShengmu, shuffleYunmu);
+        const randomPick = () => {
             let ch = ''
-            if(x.code="Space"){
-                if (sl.value == 'ym') {
-                    ch = shuffleYunmu.pop()
-                }
 
-                if (sl.value == 'sm') {
-                    ch = shuffleShengmu.pop()
-                }
+            if (sl.value == 'ym') {
+                ch = shuffleYunmu.pop()
             }
 
-            console.log(ch)
+            if (sl.value == 'sm') {
+                ch = shuffleShengmu.pop()
+            }
 
-            char.innerHTML=ch ? `<span style="font-size:30vw">${ch}</span>` : '🎉'
+            char.innerHTML = ch ? `<span style="font-size:30vw">${ch}</span>` : '🎉'
+        }
+
+        document.body.addEventListener('keypress', (x) => {
+            console.log(shuffleShengmu, shuffleYunmu);
+            if (x.code = "Space") {
+                randomPick()
+            }
+
+        })
+
+        document.body.addEventListener('touchstart', () => {
+            randomPick()
         })
     </script>
 
-    
+
 </body>
 
 </html>
