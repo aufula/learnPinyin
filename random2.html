@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="pinyin.css">
 </head>
 <script src="pymp3.js"></script>
+<script src="2500.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/cnchar/cnchar.min.js"></script>
 
 <body>
     <div class="wrap">
@@ -22,7 +24,7 @@
 
 
         var sm = ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']
-        var ym = ['a', 'o', 'e', 'i', 'u', 'ü',]// 'ai', 'ei', 'ui', 'ao', 'ou', 'iu', 'ie', 'ue', 'er', 'an', 'en', 'in', 'un', 'ang', 'eng', 'ing', 'ong', 'ian', 'iao', 'uai', 'uan', 'uang', 'uo', 'ia', 'ua', 'iang', 'iong']
+        var ym = ['a', 'o', 'e', 'i', 'u', 'ü', 'ai', 'ei', 'ui', 'ao', 'ou', 'iu', 'ie', 'ue', 'er', 'an', 'en', 'in', 'un', 'ang', 'eng', 'ing', 'ong', 'ian', 'iao', 'uai', 'uan', 'uang', 'uo', 'ia', 'ua', 'iang', 'iong']
         var sd = ['0', '1', '2', '3', '4'];
 
         function shuffleArray(array) {
@@ -40,8 +42,10 @@
             if (rets && rets.length === 0) {
                 randomPick()
             } else {
-                console.log(rets)
-                char.innerHTML = `<span style="font-size:20vw">${rets[0]}</span>`
+                const zi = cnchar.spellToWord(rets[0])
+                console.log(zi.split(''))
+                const changyongzi = zi.split('').filter(a => zi25kl.findIndex(x=> x==a ) > -1)
+                char.innerHTML = `<div style="text-align:center"><span style="font-size:20vw">${rets[0]}</span></div>` //`<div style="font-size:5vw;letter-spacing:2vw">${changyongzi.join('')}</div> <div>`
             }
         }
 
